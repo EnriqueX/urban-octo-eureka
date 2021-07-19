@@ -3,8 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import {API} from "aws-amplify";
 import {withAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
+import {listArticulos} from "./graphql/queries";
+import {createArticulo, createCompra, createVenta, deleteArticulo, deleteCompra, deleteVenta} from "./graphql/mutations";
 
-const initialFormState = {nombre:''}
+const initialFormState = {nombre:'', descripcion: '', sustanciaActiva: ''}
 
 function App() {
     const [articulos, setArticulos] = useState([]);
@@ -13,21 +15,50 @@ function App() {
     useEffect(() => {fetchArticulos();}, [])
 
     async function fetchArticulos(){
-        const apiData = await API.graphql({query: 'listArticulos'})
+        const apiData = await API.graphql({query: listArticulos})
         setArticulos(apiData.data.listArticulos.items);
+    }
+
+    async function saveArticulo(){
+        if(!formData.nombre) return;
+        await API.graphql({query: createArticulo, variables: {input: formData}});
+        setArticulos([...articulos, formData]);
+        setFormData(initialFormState);
+    }
+
+    async function dropArticulo({id}){
+        const newArticulosArray = articulos.filter(articulo => articulo.id !== id);
+        setArticulos(newArticulosArray);
+        await API.graphql({query: deleteArticulo, variables: {input: {id}}});
     }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Ya tenemos auth!</h1>
-      </header>
+        <h1>Farmacia</h1>
+        <input
+            placeholder="nombre"
+            value={formData.nombre}
+            onChange={e => setFormData({...formData, 'nombre': e.target.value})}
+        />
+        <input
+            placeholder="descripcion"
+            value={formData.descripcion}
+            onChange={e => setFormData({...formData, 'descripcion': e.target.value})}
+        />
+        <input
+            placeholder="sustancia activa"
+            value={formData.sustanciaActiva}
+            onChange={e => setFormData({...formData, 'sustanciaActiva': e.target.value})}
+        />
+        <button onClick={saveArticulo}>Crear articulo</button>
         <div style={{marginBottom: 30}}>
             {
                 articulos.map(articulo =>(
-                    <div key={articulo.id}>
-                        <h2>articulo.nombre</h2>
+                    <div key={articulo.id || articulo.nombre}>
+                        <h2>{articulo.nombre}</h2>
+                        <p>{articulo.descripcion}</p>
+                        <p>{articulo.sustanciaActiva}</p>
+                        <button onClick={() => deleteArticulo(articulo.id)}>Borrar articulo</button>
                     </div>
                 ))
             }
