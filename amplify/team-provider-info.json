@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-farmacia-staging-161233-authRole",
+      "UnauthRoleArn": "arn:aws:iam::437686421006:role/amplify-farmacia-staging-161233-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::437686421006:role/amplify-farmacia-staging-161233-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-farmacia-staging-161233-deployment",
+      "UnauthRoleName": "amplify-farmacia-staging-161233-unauthRole",
+      "StackName": "amplify-farmacia-staging-161233",
+      "StackId": "arn:aws:cloudformation:us-east-2:437686421006:stack/amplify-farmacia-staging-161233/cb8ee3b0-e719-11eb-aee1-0ab7b6d25444",
+      "AmplifyAppId": "d1amubhzoswdmb"
+    },
+    "categories": {
+      "auth": {
+        "Farmacia": {}
+      }
+    }
+  }
+}

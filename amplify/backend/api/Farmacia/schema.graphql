@@ -1,0 +1,41 @@
+type Venta @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  fecha: AWSDate
+  precio: Float
+  cantidad: Int
+  VentaArticulos: [VentaArticulo] @connection(keyName: "byVenta", fields: ["id"])
+}
+
+type Compra @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  fecha: AWSDate
+  cantidad: Int
+  precio: Float
+  CompraArticulos: [CompraArticulo] @connection(keyName: "byCompra", fields: ["id"])
+  fechaCaducidad: String
+}
+
+type Articulo @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nombre: String
+  descripcion: String
+  sustanciaActiva: String
+  compras: [CompraArticulo] @connection(keyName: "byArticulo", fields: ["id"])
+  ventas: [VentaArticulo] @connection(keyName: "byArticulo", fields: ["id"])
+}
+
+type CompraArticulo @model(queries: null) @key(name: "byCompra", fields: ["compraID", "articuloID"]) @key(name: "byArticulo", fields: ["articuloID", "compraID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  compraID: ID!
+  articuloID: ID!
+  compra: Compra! @connection(fields: ["compraID"])
+  articulo: Articulo! @connection(fields: ["articuloID"])
+}
+
+type VentaArticulo @model(queries: null) @key(name: "byVenta", fields: ["ventaID", "articuloID"]) @key(name: "byArticulo", fields: ["articuloID", "ventaID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  ventaID: ID!
+  articuloID: ID!
+  venta: Venta! @connection(fields: ["ventaID"])
+  articulo: Articulo! @connection(fields: ["articuloID"])
+}
