@@ -1,6 +1,6 @@
-import {useState, useEffect} from "react";
-import logo from './logo.svg';
-import './App.css';
+import React, {Component, useState, useEffect} from "react";
+import './scss/style.scss';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import {API} from "aws-amplify";
 import {withAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
 import {listArticulos} from "./graphql/queries";
