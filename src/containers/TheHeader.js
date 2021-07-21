@@ -67,7 +67,7 @@ const TheHeader = () => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <AmplifySignOut />
+        <AmplifySignOut buttonText="Salir"/>
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

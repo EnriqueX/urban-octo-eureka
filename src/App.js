@@ -1,10 +1,7 @@
-import React, {Component, useState, useEffect} from "react";
+import React, {Component} from "react";
 import './scss/style.scss';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import {API} from "aws-amplify";
-import {withAuthenticator, AmplifySignOut} from "@aws-amplify/ui-react";
-import {listArticulos} from "./graphql/queries";
-import {createArticulo, createCompra, createVenta, deleteArticulo, deleteCompra, deleteVenta} from "./graphql/mutations";
+import {withAuthenticator} from "@aws-amplify/ui-react";
 
 const loading = (
     <div className="pt-3 text-center">
@@ -36,4 +33,4 @@ class App extends Component {
 }
 
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, {usernameAlias:"email"});
