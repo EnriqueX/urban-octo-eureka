@@ -19,13 +19,13 @@ const _nav =  [
   {
     _tag: 'CSidebarNavItem',
     name: 'Medicamentos',
-    to: '/theme/colors',
+    to: '/medicamentos',
     icon: 'cil-drop',
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Farmacia',
-    to: '/theme/typography',
+    to: '/productos',
     icon: 'cil-pencil',
   },
   {
@@ -35,36 +35,36 @@ const _nav =  [
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Compras',
-    route: '/base',
+    route: '/compras',
     icon: 'cil-puzzle',
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Administrar',
-        to: '/base/breadcrumbs',
+        to: '/compras',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Reportes',
-        to: '/base/cards',
+        to: '/reportes/compras',
       },
     ],
   },
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Ventas',
-    route: '/buttons',
+    route: '/ventas',
     icon: 'cil-cursor',
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Administrar',
-        to: '/buttons/buttons',
+        to: '/ventas',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Reportes',
-        to: '/buttons/brand-buttons',
+        to: '/reportes/ventas',
       },
     ],
   },
