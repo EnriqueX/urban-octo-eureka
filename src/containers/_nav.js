@@ -24,7 +24,7 @@ const _nav =  [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'Farmacia',
+    name: 'Productos',
     to: '/productos',
     icon: 'cil-pencil',
   },
